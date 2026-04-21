@@ -61,9 +61,9 @@ std::string SessionAgregator::createSession(web::json::value value) {
     } else {
         // создаем идентификатор для новой пользовательской сессии
         authInStr = generateUuid(authInStr);
-        // получаем сессию пользователя и сохраняем ее в map
-        Session session = getFieldsFromSession(loginFromJson);
-        fillMap(authInStr, session);
+       // получаем данные сессии пользователя и сохраняем их в currentConnections
+Session session = getFieldsFromSession(loginFromJson);
+fillMap(authInStr, session);
     }
     return authInStr;
 }
