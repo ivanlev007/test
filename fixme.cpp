@@ -46,8 +46,8 @@ bool SessionAgregator::diffMoreTtl(tm creationTime) {
     return diff >= TTL;
 }
 
-Session SessionAgregator::getSessionById(std::string id) {
-    return currentConnections[id];
+Session SessionAgregator::getSessionById(std::string sessionId) {
+    return currentConnections[sessionId];
 }
 
 std::string SessionAgregator::createSession(web::json::value value) {
