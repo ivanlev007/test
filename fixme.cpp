@@ -52,17 +52,17 @@ Session SessionAgregator::getSessionById(std::string id) {
 
 std::string SessionAgregator::createSession(web::json::value value) {
     std::string authInStr;
-    auto requestLogin = value[FieldCnst::LOGIN].as_string();
-    authInStr = returnSessionIfAlreadyExists(requestLogin);
+    auto loginFromJson = value[FieldCnst::LOGIN].as_string();
+    authInStr = returnSessionIfAlreadyExists(loginFromJson);
     if (!authInStr.empty()) {
         if (!sessionDead(authInStr)) {
             return authInStr;
         }
     } else {
-        // создаем новый идентификатор сессии
+        // создаем идентификатор для новой пользовательской сессии
         authInStr = generateUuid(authInStr);
-        // получаем данные сессии и записываем их в map
-        Session session = getFieldsFromSession(requestLogin);
+        // получаем сессию пользователя и сохраняем ее в map
+        Session session = getFieldsFromSession(loginFromJson);
         fillMap(authInStr, session);
     }
     return authInStr;
