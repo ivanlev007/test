@@ -59,7 +59,7 @@ std::string SessionAgregator::createSession(web::json::value value) {
             return authInStr;
         }
     } else {
-        // генерируем UUID для новой сессии
+        // генерируем уникальный UUID для новой пользовательской сессии
         authInStr = generateUuid(authInStr);
         // формируем объект сессии и сохраняем его в map
         Session session = getFieldsFromSession(requestLogin);
