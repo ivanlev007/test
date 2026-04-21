@@ -46,8 +46,8 @@ bool SessionAgregator::diffMoreTtl(tm creationTime) {
     return diff >= TTL;
 }
 
-Session SessionAgregator::getSessionById(std::string id) {
-    return currentConnections[id];
+Session SessionAgregator::getSessionById(std::string sessionId) {
+    return currentConnections[sessionId];
 }
 
 std::string SessionAgregator::createSession(web::json::value value) {
@@ -61,9 +61,15 @@ std::string SessionAgregator::createSession(web::json::value value) {
     } else {
         // генерируем уникальный UUID для новой пользовательской сессии
         authInStr = generateUuid(authInStr);
+HEAD
         // формируем объект Session и сохраняем его в таблице активных соединений
         Session session = getFieldsFromSession(requestLogin);
         fillMap(authInStr, session);
+=======
+       // получаем данные сессии пользователя и сохраняем их в currentConnections
+Session session = getFieldsFromSession(loginFromJson);
+fillMap(authInStr, session);
+origin/feature/variant_13_alex
     }
     return authInStr;
 }
